@@ -1,0 +1,1 @@
+require 'a2z'
