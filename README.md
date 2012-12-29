@@ -198,22 +198,26 @@ For example:
     item.title
     => "Away From The World (Deluxe Version)"
     
+    item.keys
+    => ["artist", "manufacturer", "product_group"]
+    
+    item.composer?
+    => false
+    
+    item.artist?  # or item.manufacturer? or item.product_group?
+    => true
+    
     item.artist
     => "Dave Matthews Band"
-    
-    item.detail_page_url
-    => ""http://www.amazon.com/Away-From-World-Deluxe-Version/dp/B008FERRFO..."
     
     item.manufacturer
     => "RCA"
     
     item.product_group
     => "Music"
-
-Note that some attributes like `artist` and `manufacturer` are only set
-depending upon the type of item.  There is currently no way to determine which
-attributes have been set on an item object instance.  This issue will be
-addressed in the next gem release.
+    
+    item.detail_page_url
+    => ""http://www.amazon.com/Away-From-World-Deluxe-Version/dp/B008FERRFO..."
 
 ### Operation Requests
 

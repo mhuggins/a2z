@@ -7,11 +7,39 @@ module A2z
       
       def initialize
         @links = []
+        @attrs = {}
+      end
+      
+      def keys
+        @attrs.keys
+      end
+      
+      def respond_to_missing?(name, include_private = false)
+        name.to_s.end_with?('?') || super
+      end
+      
+      def method_missing(name, *args, &block)
+        method_name = name.to_s
+        
+        if method_name.end_with?('?')  # && method_name != 'has_key?'
+          has_key?(method_name.sub(/\?$/, ''))
+        elsif has_key?(method_name)
+          self[method_name]
+        else
+          super
+        end
       end
       
       def []=(key, value)
-        instance_variable_set("@#{key}".to_sym, value)
-        self.class.class_eval { attr_reader key.to_sym }
+        @attrs[key] = value
+      end
+      
+      def [](key)
+        @attrs[key]
+      end
+      
+      def has_key?(key)
+        @attrs.has_key?(key)
       end
       
       def self.from_response(data)
