@@ -242,7 +242,7 @@ For example:
     => Hash
     
     response.operation_request.arguments['Operation']
-    => "ItemSearch"
+    => "ItemLookup"
 
 ## Contributing
 
