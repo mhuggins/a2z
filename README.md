@@ -219,6 +219,69 @@ For example:
     item.detail_page_url
     => ""http://www.amazon.com/Away-From-World-Deluxe-Version/dp/B008FERRFO..."
 
+When an item lookup or item search includes the "Images" response group, items
+will also have their `small_image`, `medium_image`, `large_image`, and
+`image_sets` attributes populated, assuming they are included in the API
+response.
+
+    response = client.item_lookup do
+      id 'B008VVEJNE'
+      response_group 'Images'
+    end
+    
+    item = response.item
+    
+    item.small_image           # => #<A2z::Responses::Image ...>
+    item.medium_image          # => #<A2z::Responses::Image ...>
+    item.large_image           # => #<A2z::Responses::Image ...>
+    
+    item.image_sets.size       # => 2
+    item.image_sets.keys       # => [:primary, :variant]
+    item.image_sets[:primary]  # => #<A2z::Responses::ImageSet ...>
+
+Refer to the Image Sets and Images sections below for more information on using
+this objects.
+
+### Image Sets
+
+Image sets are accessible on items when the "Images" responses group is
+included as part of an item lookup or item search request.  Image sets are
+relatively simple objects, only including a category name and hash of images
+keyed by size.
+
+For example:
+
+    response = client.item_lookup do
+      id 'B008VVEJNE'
+      response_group 'Images'
+    end
+    
+    item_set = response.item.image_sets[:primary]
+    
+    item_set.category         # => "primary"
+    item_set.images.keys      # => [:swatch, :small, :thumbnail, :tiny, :medium, :large]
+    item_set.images[:swatch]  # => #<A2z::Responses::Image ...>
+
+Refer to the Images section below for more information on using this objects.
+
+### Images
+
+Images are accessible on items and through item sets when the "Images" response
+group is included as part of an item lookup or item search request.  Images
+include only vital information, including the URL, width, and height in pixels.
+
+For example:
+
+    response = client.item_lookup do
+      id 'B008VVEJNE'
+      response_group 'Images'
+    end
+    
+    image = response.item.large_image
+    image.url     # => "http://ecx.images-amazon.com/images/I/411%2BCDuXoSL.jpg"
+    image.width   # => 297
+    image.height  # => 500
+
 ### Operation Requests
 
 Item lookup and item search response objects include an
