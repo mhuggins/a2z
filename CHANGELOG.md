@@ -1,4 +1,4 @@
-## A2z 0.0.3 (Unreleased)
+## A2z 0.0.3 (Dec 30, 2012)
 
 * Add `small_image`, `medium_image`, and `large_image` accessors on `Item`,
   populating them when present in an item lookup or item search API response.
