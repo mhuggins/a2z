@@ -4,6 +4,7 @@ module A2z
       attr_reader :params
       
       def initialize(value, &block)
+        value = value.join(',') if value.kind_of?(Array)
         @params = { 'ResponseGroup' => value }
         instance_eval(&block) if block_given?
       end

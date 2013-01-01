@@ -1,3 +1,8 @@
+## A2z 0.0.4 (Unreleased)
+
+* Accept a string or an array for ResponseGroup value when initializing via
+  `ItemLookup#response_group` or `ItemSearch#response_group`. *Matt Huggins*
+
 ## A2z 0.0.3 (Dec 30, 2012)
 
 * Add `small_image`, `medium_image`, and `large_image` accessors on `Item`,
