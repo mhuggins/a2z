@@ -65,26 +65,13 @@ can be done through the `item_search` method.
 The return value is an `A2z::Responses::ItemSearch` object.  The example above
 would make the following calls possible.
 
-    response.valid?
-    => true
-    
-    response.total_results
-    => 435
-    
-    response.total_pages
-    => 44
-    
-    response.items.size
-    => 10
-    
-    response.items.first
-    # => #<A2z::Responses::Item ...>
-    
-    response.more_search_results_url
-    => "http://www.amazon.com/gp/redirect.html?camp=2025&creative=386001&location=..."
-    
-    response.operation_request
-    => #<A2z::Responses::OperationRequest ...>
+    response.valid?                        # => true
+    response.total_results                 # => 435
+    response.total_pages                   # => 44
+    response.items.size                    # => 10
+    response.items.first                   # => #<A2z::Responses::Item ...>
+    response.more_search_results_url       # => "http://www.amazon.com/gp/redirect.html?camp=2025&creative=386001&location=..."
+    response.operation_request             # => #<A2z::Responses::OperationRequest ...>
 
 For more information on interacting with `A2z::Responses::Item` and
 `A2z::Responses::OperationRequest` objects, refer to their respective sections
@@ -144,14 +131,9 @@ be done through the `item_lookup` method.
 The return value is an `A2z::Responses::ItemLookup` object.  The example above
 would make the following calls possible.
 
-    response.valid?
-    => true
-    
-    response.item
-    # => #<A2z::Responses::Item ...>
-    
-    response.operation_request
-    => #<A2z::Responses::OperationRequest ...>
+    response.valid?                        # => true
+    response.item                          # => #<A2z::Responses::Item ...>
+    response.operation_request             # => #<A2z::Responses::OperationRequest ...>
 
 For more information on interacting with `A2z::Responses::Item` and
 `A2z::Responses::OperationRequest` objects, refer to their respective sections
@@ -186,38 +168,19 @@ instance methods, respectively.
 
 For example:
 
-    response = client.item_search { ... }
-    => #<A2z::Responses::ItemSearch ...>
-    
-    item = response.items.first
-    => #<A2z::Responses::Item ...>
-    
-    item.asin
-    => "B008FERRFO"
-    
-    item.title
-    => "Away From The World (Deluxe Version)"
-    
-    item.keys
-    => ["artist", "manufacturer", "product_group"]
-    
-    item.composer?
-    => false
-    
-    item.artist?  # or item.manufacturer? or item.product_group?
-    => true
-    
-    item.artist
-    => "Dave Matthews Band"
-    
-    item.manufacturer
-    => "RCA"
-    
-    item.product_group
-    => "Music"
-    
-    item.detail_page_url
-    => ""http://www.amazon.com/Away-From-World-Deluxe-Version/dp/B008FERRFO..."
+    response = client.item_search { ... }  # => #<A2z::Responses::ItemSearch ...>
+    item = response.items.first            # => #<A2z::Responses::Item ...>
+    item.asin                              # => "B008FERRFO"
+    item.title                             # => "Away From The World (Deluxe Version)"
+    item.keys                              # => ["artist", "manufacturer", "product_group"]
+    item.artist?                           # => true
+    item.manufacturer?                     # => true
+    item.product_group?                    # => true
+    item.composer?                         # => false
+    item.artist                            # => "Dave Matthews Band"
+    item.manufacturer                      # => "RCA"
+    item.product_group                     # => "Music"
+    item.detail_page_url                   # => ""http://www.amazon.com/Away-From-World-Deluxe-Version/dp/B008FERRFO..."
 
 When an item lookup or item search includes the "Images" response group, items
 will also have their `small_image`, `medium_image`, `large_image`, and
@@ -231,13 +194,13 @@ response.
     
     item = response.item
     
-    item.small_image           # => #<A2z::Responses::Image ...>
-    item.medium_image          # => #<A2z::Responses::Image ...>
-    item.large_image           # => #<A2z::Responses::Image ...>
+    item.small_image                       # => #<A2z::Responses::Image ...>
+    item.medium_image                      # => #<A2z::Responses::Image ...>
+    item.large_image                       # => #<A2z::Responses::Image ...>
     
-    item.image_sets.size       # => 2
-    item.image_sets.keys       # => [:primary, :variant]
-    item.image_sets[:primary]  # => #<A2z::Responses::ImageSet ...>
+    item.image_sets.size                   # => 2
+    item.image_sets.keys                   # => [:primary, :variant]
+    item.image_sets[:primary]              # => #<A2z::Responses::ImageSet ...>
 
 Refer to the Image Sets and Images sections below for more information on using
 this objects.
@@ -256,11 +219,10 @@ For example:
       response_group 'Images'
     end
     
-    item_set = response.item.image_sets[:primary]
-    
-    item_set.category         # => "primary"
-    item_set.images.keys      # => [:swatch, :small, :thumbnail, :tiny, :medium, :large]
-    item_set.images[:swatch]  # => #<A2z::Responses::Image ...>
+    item_set = response.item.image_sets[:primary]  # => #<A2z::Responses::ImageSet ...>
+    item_set.category                              # => "primary"
+    item_set.images.keys                           # => [:swatch, :small, :thumbnail, :tiny, :medium, :large]
+    item_set.images[:swatch]                       # => #<A2z::Responses::Image ...>
 
 Refer to the Images section below for more information on using this objects.
 
@@ -277,10 +239,10 @@ For example:
       response_group 'Images'
     end
     
-    image = response.item.large_image
-    image.url     # => "http://ecx.images-amazon.com/images/I/411%2BCDuXoSL.jpg"
-    image.width   # => 297
-    image.height  # => 500
+    image = response.item.large_image      # => #<A2z::Responses::Image ...>
+    image.url                              # => "http://ecx.images-amazon.com/images/I/411%2BCDuXoSL.jpg"
+    image.width                            # => 297
+    image.height                           # => 500
 
 ### Operation Requests
 
@@ -290,26 +252,14 @@ instance method.
 
 For example:
 
-    response = client.item_lookup { ... }
-    => #<A2z::Responses::ItemLookup ...>
-    
-    response.operation_request.request_id
-    => "fc5d5321-a347-4e65-9483-9655e8d9cf16"
-    
-    response.operation_request.request_processing_time
-    => 0.087729
-    
-    response.operation_request.headers.class
-    => Hash
-    
-    response.operation_request.headers['UserAgent']
-    => "Jeff/0.4.3 (Language=Ruby; localhost)"
-    
-    response.operation_request.arguments.class
-    => Hash
-    
-    response.operation_request.arguments['Operation']
-    => "ItemLookup"
+    response = client.item_lookup { ... }  # => #<A2z::Responses::ItemLookup ...>
+    op_req = response.operation_request    # => #<A2z::Responses::OperationRequest ...>
+    op_req.request_id                      # => "fc5d5321-a347-4e65-9483-9655e8d9cf16"
+    op_req.request_processing_time         # => 0.087729
+    op_req.headers.class                   # => Hash
+    op_req.headers['UserAgent']            # => "Jeff/0.4.3 (Language=Ruby; localhost)"
+    op_req.arguments.class                 # => Hash
+    op_req.arguments['Operation']          # => "ItemLookup"
 
 ## Contributing
 
