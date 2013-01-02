@@ -1,5 +1,8 @@
 ## A2z 0.0.4 (Unreleased)
 
+* Remove unintended `valid` accessor on `ItemLookup` and `ItemSearch` response
+  objects, favoring the `valid?` method.
+
 * Accept a string or an array for ResponseGroup value when initializing via
   `ItemLookup#response_group` or `ItemSearch#response_group`. *Matt Huggins*
 

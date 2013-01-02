@@ -1,7 +1,7 @@
 module A2z
   module Responses
     class ItemSearch
-      attr_accessor :operation_request, :items, :total_results, :total_pages, :more_search_results_url, :valid
+      attr_accessor :operation_request, :items, :total_results, :total_pages, :more_search_results_url
       
       def initialize
         @items = []
@@ -10,16 +10,16 @@ module A2z
         @valid = true
       end
       
-      def valid?
-        @valid
-      end
-      
       def valid=(value)
         @valid = !!value
       end
       
-      # TODO capture item_search_response['Items']['Request']['Errors'] into an attr_accessor value
-      # TODO consider capturing item_search_response['Items']['Request'] into an attr_accessor value
+      def valid?
+        @valid
+      end
+      
+      # TODO capture data['Items']['Request']['Errors'] into an attr_accessor value
+      # TODO consider capturing data['Items']['Request'] into an attr_accessor value
       def self.from_response(data)
         new.tap do |item_search|
           item_search.operation_request       = OperationRequest.from_response(data['OperationRequest']) if data['OperationRequest']
