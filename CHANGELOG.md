@@ -1,4 +1,4 @@
-## A2z 0.0.4 (Unreleased)
+## A2z 0.0.4 (Jan 2, 2012)
 
 * Implement Amazon's BrowseNodeLookup operation, accessible through
   `Client#browse_node_lookup`. *Matt Huggins*
