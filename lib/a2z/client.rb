@@ -48,6 +48,11 @@ module A2z
       Responses::ItemLookup.from_response(response)
     end
     
+    def browse_node_lookup(id, &block)
+      response = request(Requests::BrowseNodeLookup.new(id, &block))
+      Responses::BrowseNodeLookup.from_response(response)
+    end
+    
     private
     
     def tag=(tag)

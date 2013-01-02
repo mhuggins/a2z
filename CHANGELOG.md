@@ -1,7 +1,10 @@
 ## A2z 0.0.4 (Unreleased)
 
+* Implement Amazon's BrowseNodeLookup operation, accessible through
+  `Client#browse_node_lookup`. *Matt Huggins*
+
 * Remove unintended `valid` accessor on `ItemLookup` and `ItemSearch` response
-  objects, favoring the `valid?` method.
+  objects, favoring the `valid?` method. *Matt Huggins*
 
 * Accept a string or an array for ResponseGroup value when initializing via
   `ItemLookup#response_group` or `ItemSearch#response_group`. *Matt Huggins*

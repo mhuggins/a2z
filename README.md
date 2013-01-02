@@ -52,6 +52,52 @@ This file can then be used in the following manner:
     config = YAML.load_file(Rails.root.join('config', 'amazon.yml'))
     client = A2z::Client.new(config)
 
+### Browse Node Lookup
+
+Once you have instantiated an `A2z::Client` instance, browsing category nodes
+can be done through the `browse_node_lookup` method.
+
+    response = client.browse_node_lookup(1000)
+
+The return value is an `A2z::Responses::BrowseNodeLookup` object.  The above
+example would make the following calls possible.
+
+    response.valid?                        # => true
+    response.operation_request             # => #<A2z::Responses::OperationRequest ...>
+    
+    node = response.node                   # => #<A2z::Responses::BrowseNode ...>
+    node.id                                # => 1000
+    node.name                              # => "Subjects"
+    node.root?                             # => true
+    node.ancestors.size                    # => 1
+    node.children.size                     # => 30
+    
+    ancestor = node.ancestors.first        # => #<A2z::Responses::BrowseNode ...>
+    ancestor.id                            # => 283155
+    ancestor.name                          # => "Books"
+    ancestor.root?                         # => false
+    
+    child = node.children.first            # => #<A2z::Responses::BrowseNode ...>
+    child.id                               # => 1
+    child.name                             # => "Arts & Photography"
+    child.root?                            # => false
+
+For more information on interacting with `A2z::Responses::OperationRequest`
+objects, refer to its respective section below.  With regards to children, only
+the direct children are included in a response.  However, ancestors are nested
+all the way to the top-most parent.
+
+The following code demonstrate the full collection of methods provided when
+performing a browse node lookup.
+
+    response = client.browse_node_lookup(1000) do
+                 response_group 'TopSellers'
+               end
+
+Required arguments and argument values vary depending upon how you use the API.
+For a full list of arguments and when they are required vs. optional, refer to
+Amazon's [BrowseNodeLookup documentation](http://docs.amazonwebservices.com/AWSECommerceService/latest/DG/BrowseNodeLookup.html).
+
 ### Item Search
 
 Once you have instantiated an `A2z::Client` instance, searching for products
