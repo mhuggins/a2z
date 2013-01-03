@@ -355,7 +355,7 @@ response objects only include the source and the content.
 
 ### Operation Requests
 
-Item lookup and item search response objects include an
+Item lookup, item search, and browse node lookup response objects include an
 `A2z::Responses::OperationRequest` accessible via the `#operation_request`
 instance method.
 
