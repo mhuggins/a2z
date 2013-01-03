@@ -3,6 +3,11 @@ module A2z
     class Image
       attr_accessor :url, :width, :height
       
+      def initialize
+        @width = 0
+        @height = 0
+      end
+      
       def width=(value)
         @width = value.to_i
       end

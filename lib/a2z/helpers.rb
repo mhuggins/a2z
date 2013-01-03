@@ -14,5 +14,9 @@ module A2z
         word.downcase!
       end
     end
+    
+    def array_wrap(value)
+      value.kind_of?(Array) ? value : [value].compact
+    end
   end
 end

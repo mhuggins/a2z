@@ -1,3 +1,10 @@
+## A2z 0.1.0 (Unreleased)
+
+* Add `editorial_reviews` accessor on `Item`, populating them when present in
+  an item lookup or item search API response. *Matt Huggins*
+
+* Fix issue with browse node response data being empty. *Matt Huggins*
+
 ## A2z 0.0.4 (Jan 2, 2012)
 
 * Implement Amazon's BrowseNodeLookup operation, accessible through

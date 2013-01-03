@@ -1,6 +1,8 @@
 module A2z
   module Responses
     class ItemSearch
+      include Helpers
+      
       attr_accessor :operation_request, :items, :total_results, :total_pages, :more_search_results_url
       
       def initialize
@@ -35,8 +37,7 @@ module A2z
       private
       
       def self.items_from_response(data)
-        items = data['Items']['Item'] rescue []
-        items = [items].compact unless items.kind_of?(Array)
+        items = array_wrap(data['Items']['Item']) rescue []
         items.collect { |item| Item.from_response(item) }
       end
     end

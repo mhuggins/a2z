@@ -4,12 +4,13 @@ module A2z
       include Helpers
       
       attr_accessor :asin, :parent_asin, :detail_page_url, :links, :image_sets,
-                    :small_image, :medium_image, :large_image
+                    :small_image, :medium_image, :large_image, :editorial_reviews
       
       def initialize
         @links = []
         @attrs = {}
         @image_sets = {}
+        @editorial_reviews = []
       end
       
       def keys
@@ -23,7 +24,7 @@ module A2z
       def method_missing(name, *args, &block)
         method_name = name.to_s
         
-        if method_name.end_with?('?')  # && method_name != 'has_key?'
+        if method_name.end_with?('?')
           has_key?(method_name.sub(/\?$/, ''))
         elsif has_key?(method_name)
           self[method_name]
@@ -50,8 +51,13 @@ module A2z
           item.parent_asin = data['ParentASIN']
           item.detail_page_url = data['DetailPageURL']
           
+          item.small_image = Image.from_response(data['SmallImage']) if data['SmallImage']
+          item.medium_image = Image.from_response(data['MediumImage']) if data['MediumImage']
+          item.large_image = Image.from_response(data['LargeImage']) if data['LargeImage']
+          
           if data['ItemLinks']
-            item.links = data['ItemLinks']['ItemLink'].collect { |link| ItemLink.from_response(link) }
+            item_links = array_wrap(data['ItemLinks']['ItemLink'])
+            item.links = item_links.collect { |link| ItemLink.from_response(link) }
           end
           
           if data['ItemAttributes']
@@ -59,18 +65,17 @@ module A2z
           end
           
           if data['ImageSets'] && data['ImageSets']['ImageSet']
-            image_sets = data['ImageSets']['ImageSet']
-            image_sets = [image_sets] unless image_sets.kind_of?(Array)
-            
+            image_sets = array_wrap(data['ImageSets']['ImageSet'])
             image_sets.each do |image_set|
               image_set = ImageSet.from_response(image_set)
               item.image_sets[image_set.category.to_sym] = image_set
             end
           end
           
-          item.small_image = Image.from_response(data['SmallImage']) if data['SmallImage']
-          item.medium_image = Image.from_response(data['MediumImage']) if data['MediumImage']
-          item.large_image = Image.from_response(data['LargeImage']) if data['LargeImage']
+          if data['EditorialReviews'] && data['EditorialReviews']['EditorialReview']
+            reviews = array_wrap(data['EditorialReviews']['EditorialReview'])
+            item.editorial_reviews = reviews.collect { |review| EditorialReview.from_response(review) }
+          end
           
           item.freeze
         end

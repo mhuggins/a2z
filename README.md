@@ -116,7 +116,7 @@ would make the following calls possible.
     response.total_pages                   # => 44
     response.items.size                    # => 10
     response.items.first                   # => #<A2z::Responses::Item ...>
-    response.more_search_results_url       # => "http://www.amazon.com/gp/redirect.html?camp=2025&creative=386001&location=..."
+    response.more_search_results_url       # => "http://www.amazon.com/gp/redirect.html?camp=2025&creative=386001..."
     response.operation_request             # => #<A2z::Responses::OperationRequest ...>
 
 For more information on interacting with `A2z::Responses::Item` and
@@ -226,6 +226,8 @@ For example:
     item.artist                            # => "Dave Matthews Band"
     item.manufacturer                      # => "RCA"
     item.product_group                     # => "Music"
+    item.editorial_reviews.size            # => 1
+    item.editorial_reviews.first           # => #<A2z::Responses::EditorialReview ...>
     item.detail_page_url                   # => ""http://www.amazon.com/Away-From-World-Deluxe-Version/dp/B008FERRFO..."
 
 When an item lookup or item search includes the "Images" response group, items
@@ -289,6 +291,16 @@ For example:
     image.url                              # => "http://ecx.images-amazon.com/images/I/411%2BCDuXoSL.jpg"
     image.width                            # => 297
     image.height                           # => 500
+
+### Editorial Reviews
+
+Editorial reviews are accessible on items when the "EditorialResponse" response
+group is included as part of an item lookup or item search request.  Editorial
+response objects only include the source and the content.
+
+    review = item.editorial_reviews.first  # => #<A2z::Responses::EditorialReview ...>
+    review.source                          # => "Product Description"
+    review.content                         # => "Breakout pop sensation Carly Rae Jepsen releases her..."
 
 ### Operation Requests
 

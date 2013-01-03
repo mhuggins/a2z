@@ -1,5 +1,6 @@
 require 'a2z/responses/browse_node'
 require 'a2z/responses/browse_node_lookup'
+require 'a2z/responses/editorial_review'
 require 'a2z/responses/image'
 require 'a2z/responses/image_set'
 require 'a2z/responses/item'

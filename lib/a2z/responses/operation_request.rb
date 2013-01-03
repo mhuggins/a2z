@@ -1,6 +1,8 @@
 module A2z
   module Responses
     class OperationRequest
+      include Helpers
+      
       attr_accessor :request_id, :request_processing_time, :headers, :arguments
       
       def initialize
@@ -13,16 +15,14 @@ module A2z
           operation_request.request_id = data['RequestId']
           operation_request.request_processing_time = data['RequestProcessingTime'].to_f
           
-          if data['HTTPHeaders']
-            headers = data['HTTPHeaders']['Header']
-            headers = [headers] unless headers.kind_of?(Array)
+          if data['HTTPHeaders'] && data['HTTPHeaders']['Header']
+            headers = array_wrap(data['HTTPHeaders']['Header'])
             headers = headers.collect { |h| [ h['Name'], h['Value'] ] }
             operation_request.headers = Hash[headers]
           end
           
-          if data['Arguments']
-            arguments = data['Arguments']['Argument']
-            arguments = [arguments] unless arguments.kind_of?(Array)
+          if data['Arguments'] && data['Arguments']['Argument']
+            arguments = array_wrap(data['Arguments']['Argument'])
             arguments = arguments.collect { |a| [ a['Name'], a['Value'] ] }
             operation_request.arguments = Hash[arguments]
           end
