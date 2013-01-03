@@ -1,4 +1,4 @@
-## A2z 0.1.1 (Unreleased)
+## A2z 0.1.1 (Jan 3, 2012)
 
 * Add `offers` and `offer_summary` accessors on `Item`, populating them when
   present in an item lookup or item search API response. *Matt Huggins*
