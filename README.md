@@ -228,7 +228,7 @@ For example:
     item.product_group                     # => "Music"
     item.editorial_reviews.size            # => 1
     item.editorial_reviews.first           # => #<A2z::Responses::EditorialReview ...>
-    item.detail_page_url                   # => ""http://www.amazon.com/Away-From-World-Deluxe-Version/dp/B008FERRFO..."
+    item.detail_page_url                   # => "http://www.amazon.com/Away-From-World-Deluxe-Version/dp/B008FERRFO..."
 
 When an item lookup or item search includes the "Images" response group, items
 will also have their `small_image`, `medium_image`, `large_image`, and
