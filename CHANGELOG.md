@@ -1,4 +1,4 @@
-## A2z 0.1.0 (Unreleased)
+## A2z 0.1.0 (Jan 3, 2012)
 
 * Add `editorial_reviews` accessor on `Item`, populating them when present in
   an item lookup or item search API response. *Matt Huggins*
