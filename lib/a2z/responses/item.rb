@@ -4,13 +4,15 @@ module A2z
       include Helpers
       
       attr_accessor :asin, :parent_asin, :detail_page_url, :links, :image_sets,
-                    :small_image, :medium_image, :large_image, :editorial_reviews
+                    :small_image, :medium_image, :large_image, :editorial_reviews,
+                    :offers, :offer_summary
       
       def initialize
         @links = []
         @attrs = {}
         @image_sets = {}
         @editorial_reviews = []
+        @offers = []
       end
       
       def keys
@@ -55,7 +57,9 @@ module A2z
           item.medium_image = Image.from_response(data['MediumImage']) if data['MediumImage']
           item.large_image = Image.from_response(data['LargeImage']) if data['LargeImage']
           
-          if data['ItemLinks']
+          item.offer_summary = OfferSummary.from_response(data['OfferSummary']) if data['OfferSummary']
+          
+          if data['ItemLinks'] && data['ItemLinks']['ItemLink']
             item_links = array_wrap(data['ItemLinks']['ItemLink'])
             item.links = item_links.collect { |link| ItemLink.from_response(link) }
           end
@@ -75,6 +79,11 @@ module A2z
           if data['EditorialReviews'] && data['EditorialReviews']['EditorialReview']
             reviews = array_wrap(data['EditorialReviews']['EditorialReview'])
             item.editorial_reviews = reviews.collect { |review| EditorialReview.from_response(review) }
+          end
+          
+          if data['Offers'] && data['Offers']['Offer']
+            offers = array_wrap(data['Offers']['Offer'])
+            item.offers = offers.collect { |offer| Offer.from_response(offer) }
           end
           
           item.freeze

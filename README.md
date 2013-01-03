@@ -216,18 +216,26 @@ For example:
 
     response = client.item_search { ... }  # => #<A2z::Responses::ItemSearch ...>
     item = response.items.first            # => #<A2z::Responses::Item ...>
+    
     item.asin                              # => "B008FERRFO"
-    item.title                             # => "Away From The World (Deluxe Version)"
-    item.keys                              # => ["artist", "manufacturer", "product_group"]
+    item.keys                              # => ["artist", "manufacturer", "product_group", "title"]
+    item.title?                            # => true
     item.artist?                           # => true
     item.manufacturer?                     # => true
     item.product_group?                    # => true
     item.composer?                         # => false
+    item.title                             # => "Away From The World (Deluxe Version)"
     item.artist                            # => "Dave Matthews Band"
     item.manufacturer                      # => "RCA"
     item.product_group                     # => "Music"
+    
     item.editorial_reviews.size            # => 1
     item.editorial_reviews.first           # => #<A2z::Responses::EditorialReview ...>
+    
+    item.offers.size                       # => 1
+    item.offers.first                      # => #<A2z::Responses::Offer ...>
+    item.offer_summary                     # => #<A2z::Responses::OfferSummary ...>
+    
     item.detail_page_url                   # => "http://www.amazon.com/Away-From-World-Deluxe-Version/dp/B008FERRFO..."
 
 When an item lookup or item search includes the "Images" response group, items
@@ -251,7 +259,7 @@ response.
     item.image_sets[:primary]              # => #<A2z::Responses::ImageSet ...>
 
 Refer to the Image Sets and Images sections below for more information on using
-this objects.
+these objects.
 
 ### Image Sets
 
@@ -291,6 +299,49 @@ For example:
     image.url                              # => "http://ecx.images-amazon.com/images/I/411%2BCDuXoSL.jpg"
     image.width                            # => 297
     image.height                           # => 500
+
+### Offers
+
+Offers are accessible on items when the "Offers", "OfferListings", or
+"OfferFull" response group is included as part of an item lookup or item search
+request.
+
+    offer = item.offers.first              # => #<A2z::Responses::Offer ...>
+    
+    offer.price                            # => #<Money fractional:699 currency:USD>
+    offer.price.format                     # => "$6.99"
+    
+    offer.amount_saved                     # => #<Money fractional:699 currency:USD>
+    offer.amount_saved.format              # => "$6.99"
+    
+    offer.percentage_saved                 # => 50
+    
+    offer.listing_id                       # => "oRHYBpasjoYr7hV0Ji5g6wjyJVv4xj1ZKnYRnsLsdzvcYotTARQNNueaVBzRP2CJCq..."
+    offer.condition                        # => "New"
+    offer.availability                     # => "Usually ships in 24 hours"
+    offer.super_saver_shipping_eligible?   # => true
+
+For more help on working with Money objects, refer to the
+[RubyMoney gem page](http://rubymoney.github.com/money/).
+
+### Offer Summaries
+
+Offer summaries are accessible on items when the "Offers", "OfferFull", or
+"OfferSummary" response group is included as part of an item lookup or item
+search request.
+
+    offer_summary = item.offer_summary     # => #<A2z::Responses::OfferSummary ...>
+    
+    offer_summary.lowest_new_price         # => #<Money fractional:699 currency:USD>
+    offer_summary.lowest_used_price        # => #<Money fractional:699 currency:USD>
+    
+    offer_summary.total_new                # => 28
+    offer_summary.total_used               # => 17
+    offer_summary.total_collectible        # => 0
+    offer_summary.total_refurbished        # => 0
+
+For more help on working with Money objects, refer to the
+[RubyMoney gem page](http://rubymoney.github.com/money/).
 
 ### Editorial Reviews
 

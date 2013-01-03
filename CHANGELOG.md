@@ -1,3 +1,8 @@
+## A2z 0.1.1 (Unreleased)
+
+* Add `offers` and `offer_summary` accessors on `Item`, populating them when
+  present in an item lookup or item search API response. *Matt Huggins*
+
 ## A2z 0.1.0 (Jan 3, 2012)
 
 * Add `editorial_reviews` accessor on `Item`, populating them when present in
