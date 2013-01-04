@@ -88,17 +88,10 @@ Additional response groups "MostGifted", "MostWishedFor", "NewReleases", and
 following example code.
 
     node = response.node                   # => #<A2z::Responses::BrowseNode ...>
-    
     node.most_gifted.size                  # => 10
     node.most_gifted.first                 # => #<A2z::Responses::TopItem ...>
-    
-    node.most_wished_for.size              # => 10
     node.most_wished_for.first             # => #<A2z::Responses::TopItem ...>
-    
-    node.new_releases.size                 # => 10
     node.new_releases.first                # => #<A2z::Responses::TopItem ...>
-    
-    node.top_sellers.size                  # => 10
     node.top_sellers.first                 # => #<A2z::Responses::TopItem ...>
 
 For more information on interacting with `A2z::Responses::TopItem` and
