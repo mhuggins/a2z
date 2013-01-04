@@ -20,8 +20,8 @@ module A2z
       def self.from_response(data)
         new.tap do |browse_node_lookup|
           browse_node_lookup.operation_request = OperationRequest.from_response(data['OperationRequest']) if data['OperationRequest']
-          browse_node_lookup.node              = BrowseNode.from_response(data['BrowseNodes']['BrowseNode'])
-          browse_node_lookup.valid             = data['BrowseNodes']['Request']['IsValid'] == 'True' rescue false
+          browse_node_lookup.node = BrowseNode.from_response(data['BrowseNodes']['BrowseNode'])
+          browse_node_lookup.valid = data['BrowseNodes']['Request']['IsValid'] == 'True' rescue false
           browse_node_lookup.freeze
         end
       end

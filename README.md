@@ -82,10 +82,29 @@ example would make the following calls possible.
     child.name                             # => "Arts & Photography"
     child.root?                            # => false
 
-For more information on interacting with `A2z::Responses::OperationRequest`
-objects, refer to its respective section below.  With regards to children, only
-the direct children are included in a response.  However, ancestors are nested
-all the way to the top-most parent.
+By default, Amazon assumes the response group to be "BrowseNodeInfo".
+Additional response groups "MostGifted", "MostWishedFor", "NewReleases", and
+"TopSellers" can be requested as well, allowing access to top items per the
+following example code.
+
+    node = response.node                   # => #<A2z::Responses::BrowseNode ...>
+    
+    node.most_gifted.size                  # => 10
+    node.most_gifted.first                 # => #<A2z::Responses::TopItem ...>
+    
+    node.most_wished_for.size              # => 10
+    node.most_wished_for.first             # => #<A2z::Responses::TopItem ...>
+    
+    node.new_releases.size                 # => 10
+    node.new_releases.first                # => #<A2z::Responses::TopItem ...>
+    
+    node.top_sellers.size                  # => 10
+    node.top_sellers.first                 # => #<A2z::Responses::TopItem ...>
+
+For more information on interacting with `A2z::Responses::TopItem` and
+`A2z::Responses::OperationRequest` objects, refer to their respective sections
+below.  With regards to children, only the direct children are included in a
+response.  However, ancestors are nested all the way to the top-most parent.
 
 The following code demonstrate the full collection of methods provided when
 performing a browse node lookup.
@@ -261,6 +280,21 @@ response.
 Refer to the Image Sets and Images sections below for more information on using
 these objects.
 
+### Top Items
+
+Top items are accessible on browse nodes when performing browse node lookups
+with a response group of "MostGifted", "MostWishedFor", "NewReleases", and
+"TopSellers".
+
+    top_item = node.top_sellers.first      # => #<A2z::Responses::TopItem ...>
+    top_item.asin                          # => "B00AQ3K8IU"
+    top_item.title                         # => "Hopeless"
+    top_item.product_group                 # => "eBooks"
+    top_item.actor                         # => nil
+    top_item.artist                        # => nil
+    top_item.author                        # => "Hoover, Colleen"
+    top_item.detail_page_url               # => "http://www.amazon.com/Hopeless-ebook/dp/B00AQ3K8IU..."
+
 ### Image Sets
 
 Image sets are accessible on items when the "Images" responses group is
@@ -270,15 +304,10 @@ keyed by size.
 
 For example:
 
-    response = client.item_lookup do
-      id 'B008VVEJNE'
-      response_group 'Images'
-    end
-    
-    item_set = response.item.image_sets[:primary]  # => #<A2z::Responses::ImageSet ...>
-    item_set.category                              # => "primary"
-    item_set.images.keys                           # => [:swatch, :small, :thumbnail, :tiny, :medium, :large]
-    item_set.images[:swatch]                       # => #<A2z::Responses::Image ...>
+    item_set = item.image_sets[:primary]   # => #<A2z::Responses::ImageSet ...>
+    item_set.category                      # => "primary"
+    item_set.images.keys                   # => [:swatch, :small, :thumbnail, :tiny, :medium, :large]
+    item_set.images[:swatch]               # => #<A2z::Responses::Image ...>
 
 Refer to the Images section below for more information on using this objects.
 
