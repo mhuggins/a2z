@@ -1,5 +1,7 @@
 # A2z
 
+[![Code Climate](https://codeclimate.com/github/mhuggins/a2z.png)](https://codeclimate.com/github/mhuggins/a2z)
+
 A2z provides a simple Ruby DSL to retrieve product information from the
 [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html).
 
