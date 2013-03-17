@@ -1,5 +1,6 @@
 # A2z
 
+[![Build Status](https://secure.travis-ci.org/mhuggins/a2z.png)](http://travis-ci.org/mhuggins/a2z)
 [![Code Climate](https://codeclimate.com/github/mhuggins/a2z.png)](https://codeclimate.com/github/mhuggins/a2z)
 
 A2z provides a simple Ruby DSL to retrieve product information from the
