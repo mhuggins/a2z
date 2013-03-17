@@ -6,9 +6,33 @@ describe A2z::Requests::BrowseNodeLookup do
   end
   
   let(:id) { 1 }
-  let(:block) { Proc.new { } }
+  let(:block) { proc { } }
   
   describe '#params' do
-    it 'should return a hash'
+    specify { subject.params.should be_a Hash }
+    
+    it 'sets the operation' do
+      subject.params['Operation'].should eq 'BrowseNodeLookup'
+    end
+    
+    it 'sets the passed node ID' do
+      subject.params['BrowseNodeId'].should eq id
+    end
+    
+    describe 'when response group is specified' do
+      let(:block) { proc { response_group 'Offers' } }
+      
+      it 'sets the response group' do
+        subject.params['ResponseGroup'].should eq 'Offers'
+      end
+    end
+    
+    describe 'when nothing is specified' do
+      let(:block) { proc { } }
+      
+      it 'does not set response group' do
+        subject.params.should_not have_key 'ResponseGroup'
+      end
+    end
   end
 end

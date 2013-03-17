@@ -8,6 +8,6 @@ describe A2z::Requests::ItemSearch do
   let(:block) { Proc.new { } }
   
   describe '#params' do
-    it 'should return a hash'
+    specify { subject.params.should be_a Hash }
   end
 end
