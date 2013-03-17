@@ -31,7 +31,7 @@ describe A2z::Requests::ItemLookup do
         end
       end
     end
-
+    
     describe 'when category is specified' do
       let(:block) { proc { category 'Books' } }
       
