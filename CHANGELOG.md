@@ -4,6 +4,9 @@
   accessors on `BrowseNode`, populating them when present in a browse node
   lookup response. *Matt Huggins*
 
+* Fix issue with offer summary parsing the wrong node for `lowest_used_price`.
+  *Matt Huggins*
+
 ## A2z 0.1.1 (Jan 3, 2012)
 
 * Add `offers` and `offer_summary` accessors on `Item`, populating them when
