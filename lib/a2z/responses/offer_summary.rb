@@ -48,7 +48,7 @@ module A2z
           end
           
           if data['LowestUsedPrice']
-            offer_summary.lowest_used_price = Money.new(data['LowestNewPrice']['Amount'].to_i, data['LowestNewPrice']['CurrencyCode'])
+            offer_summary.lowest_used_price = Money.new(data['LowestUsedPrice']['Amount'].to_i, data['LowestUsedPrice']['CurrencyCode'])
           end
           
           offer_summary.total_new = data['TotalNew']
