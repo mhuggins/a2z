@@ -118,14 +118,14 @@ describe A2z::Client do
   private
   
   def item_search_response
-    stub(body: '<OperationRequest/><Items/>')
+    double(body: '<OperationRequest/><Items/>')
   end
   
   def item_lookup_response
-    stub(body: '<OperationRequest/><Items/>')
+    double(body: '<OperationRequest/><Items/>')
   end
   
   def browse_node_lookup_response
-    stub(body: '<OperationRequest/><BrowseNodes><BrowseNode/></BrowseNodes>')
+    double(body: '<OperationRequest/><BrowseNodes><BrowseNode/></BrowseNodes>')
   end
 end

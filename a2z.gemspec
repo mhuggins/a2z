@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = A2z::VERSION
   
   gem.add_dependency 'crack'
-  gem.add_dependency 'jeff'
+  gem.add_dependency 'jeff', '~> 0.6.4'
   gem.add_dependency 'money'
   
   gem.add_development_dependency 'rake'
