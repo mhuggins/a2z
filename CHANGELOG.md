@@ -1,4 +1,8 @@
-## A2z 0.1.2 (Unreleased)
+## A2z 0.1.3 (December 7, 2013)
+
+* Fix issue with breaking changes to the jeff gem dependency. *Matt Huggins*
+
+## A2z 0.1.2 (July 1, 2013)
 
 * Add `most_gifted`, `most_wished_for`, `new_releases`, and `top_sellers`
   accessors on `BrowseNode`, populating them when present in a browse node
